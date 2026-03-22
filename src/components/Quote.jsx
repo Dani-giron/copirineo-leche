@@ -45,7 +45,7 @@ export default function Quote() {
     <section ref={sectionRef} className="quote">
       {/* Foto fondo: vacas al atardecer con pico de montaña */}
       <div className="quote__photo-bg" aria-hidden="true">
-        <img src="/WhatsApp Image 2026-03-22 at 17.26.51 (4).jpeg" alt="" />
+        <img src="/WhatsApp Image 2026-03-22 at 17.26.51 (4).jpeg" alt="" loading="lazy" />
       </div>
       <span className="quote__mark" aria-hidden="true">"</span>
       <blockquote className="quote__block">

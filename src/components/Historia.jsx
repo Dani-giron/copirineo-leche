@@ -156,11 +156,13 @@ export default function Historia() {
             src="/vacas en campo.jpeg"
             alt="Vacas Holstein en los pastos de la Ribagorza, Huesca"
             className="historia__photo"
+            loading="lazy"
           />
           <img
             src="/vacas prado (4).jpeg"
             alt="Cooperativa Láctea Altoaragón, Graus"
             className="historia__photo historia__photo--secondary"
+            loading="lazy"
           />
         </div>
       </div>

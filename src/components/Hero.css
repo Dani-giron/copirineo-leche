@@ -40,7 +40,6 @@
   overflow: hidden;
   z-index: 0;
   pointer-events: none;
-  will-change: clip-path;
 }
 
 .hero__bg-text span {
@@ -105,7 +104,6 @@
   font-family: var(--font-display);
   line-height: 0.92;
   letter-spacing: -0.01em;
-  will-change: transform;
 }
 
 .hero__title-la {
@@ -203,7 +201,6 @@
   background: var(--green);
   border-radius: 58% 42% 48% 52% / 44% 56% 44% 56%;
   opacity: 0.28;
-  will-change: transform;
   mix-blend-mode: screen;
   transform-origin: center center;
 }
@@ -211,7 +208,6 @@
 .hero__carton {
   position: relative;
   z-index: 2;
-  will-change: transform;
   filter: drop-shadow(20px 20px 0 rgba(0,0,0,0.45));
 }
 

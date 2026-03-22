@@ -35,7 +35,10 @@ export default function Navbar() {
   return (
     <nav ref={navRef} className="navbar">
       <a href="#" className="navbar__logo">
-        <img src="/logo.png" alt="Copirineo" className="navbar__logo-img" />
+        <picture>
+          <source srcSet="/logo.webp" type="image/webp" />
+          <img src="/logo.png" alt="Copirineo" className="navbar__logo-img" fetchPriority="high" />
+        </picture>
       </a>
       <ul className="navbar__links">
         {links.map(l => (

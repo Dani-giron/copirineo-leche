@@ -76,7 +76,7 @@ export default function Hero() {
     <section ref={heroRef} className="hero grain">
       {/* Foto de fondo: vacas en el Pirineo */}
       <div className="hero__photo-bg" aria-hidden="true">
-        <img src="/vacas prado (1).jpeg" alt="" />
+        <img src="/vacas prado (1).jpeg" alt="" fetchPriority="high" />
       </div>
 
       {/* Capa 1: texto de fondo gigante */}
@@ -113,6 +113,7 @@ export default function Hero() {
               src="/bricks  de leche.jpeg"
               alt="Copirineo leche entera del Pirineo"
               className="hero__carton-img"
+              fetchPriority="high"
             />
           </div>
         </div>

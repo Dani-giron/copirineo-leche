@@ -17,7 +17,6 @@
   color: rgba(255, 255, 255, 0.05);
   pointer-events: none;
   user-select: none;
-  will-change: transform;
   letter-spacing: -0.02em;
 }
 
