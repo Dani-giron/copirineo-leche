@@ -108,9 +108,9 @@ export default function DondeComprar() {
           </h2>
 
           <p className="donde__desc">
-            Producida en Graus, Huesca. Distribuida en Aragón.
-            Sin rodeos, sin almacenes lejanos. Si eres aragonés,
-            ya tienes Copirineo cerca.
+            Producida en granjas aragonesas, procesada en Binéfar.
+            Distribuida en Aragón sin rodeos ni almacenes lejanos.
+            Si eres aragonés, ya tienes Copirineo cerca.
           </p>
 
           <ul ref={listRef} className="donde__list">
@@ -131,7 +131,7 @@ export default function DondeComprar() {
               alt="Camión Copirineo — El sabor de aquí"
               className="donde__truck-img"
             />
-            <span className="donde__truck-caption">El sabor de aquí · Graus, Huesca</span>
+            <span className="donde__truck-caption">El sabor de aquí · Aragón</span>
           </div>
           <div className="donde__map">
             <AragonMap width={480} />

@@ -109,23 +109,23 @@ export default function Historia() {
               <span ref={titleLine1} className="historia__title-main">GANADEROS</span>
             </span>
             <span className="line-wrap">
-              <span ref={titleLine2} className="historia__title-sub">del Pirineo</span>
+              <span ref={titleLine2} className="historia__title-sub">de Aragón</span>
             </span>
           </h2>
 
           <div ref={textRef} className="historia__text">
             <p>
-              Somos familias oscenses de la Ribagorza. Nuestros abuelos ya
+              Somos familias ganaderas aragonesas. Nuestros abuelos ya
               cuidaban estas vacas, y nuestros hijos seguirán haciéndolo.
-              En el Pirineo aragonés, a más de 1.000 metros de altitud,
-              las Holstein pastan en libertad como siempre ha sido —
-              sin jaulas, sin prisas, sin atajos.
+              En Aragón, nuestras vacas Holstein pastan en los pastos
+              de montaña como siempre ha sido — con espacio, con tiempo,
+              sin atajos.
             </p>
             <p>
-              Aquí no hay intermediarios. La leche sale de nuestros establos
-              en Graus y llega directa a los lineales aragoneses. Kilómetro
-              cero de verdad. Ganadería extensiva que cuida el animal,
-              respeta el territorio y mantiene vivo el paisaje pirenaico
+              Aquí no hay intermediarios. La leche sale de las granjas
+              aragonesas, se procesa en Binéfar y llega directa
+              a los lineales aragoneses. Kilómetro cero de verdad. Ganadería extensiva que cuida el animal,
+              respeta el territorio y mantiene vivo el paisaje oscense
               de generación en generación.
             </p>
           </div>

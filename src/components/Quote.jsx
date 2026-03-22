@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger)
 const LINES = [
   'No vendemos leche.',
   'Vendemos lo que pasa cuando una vaca',
-  'pasa su vida entera en un prado del Pirineo.',
+  'crece bien cuidada en los pastos aragoneses.',
 ]
 
 export default function Quote() {
@@ -56,7 +56,7 @@ export default function Quote() {
         ))}
       </blockquote>
       <p ref={attrRef} className="quote__attr">
-        — Ganaderos de Copirineo, Ribagorza (Huesca)
+        — Ganaderos de Copirineo, Aragón
       </p>
     </section>
   )

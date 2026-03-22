@@ -123,7 +123,7 @@ export default function Hero() {
           <div ref={dividerRef} className="hero__divider" />
           <p ref={paraRef} className="hero__para">
             Familias ganaderas oscenses, generaciones de oficio.<br />
-            Vacas Holstein en libertad a más de 1.000 metros.<br />
+            Vacas Holstein en pastos de montaña aragoneses.<br />
             De los pastos del Pirineo a tu mesa. Cero intermediarios.
           </p>
           <a ref={btnRef} href="#productos" className="hero__cta">

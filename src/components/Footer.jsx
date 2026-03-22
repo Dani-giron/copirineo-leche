@@ -76,9 +76,9 @@ export default function Footer() {
         <div className="footer__bottom">
           <span>© 2026 Copirineo</span>
           <span className="footer__dot">·</span>
-          <span>Pirineo Aragonés</span>
+          <span>Aragón</span>
           <span className="footer__dot">·</span>
-          <span>Hecho en Graus, Huesca</span>
+          <span>Hecho en Aragón</span>
         </div>
       </div>
     </footer>

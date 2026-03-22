@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import './Marquee.css'
 
-const TEXT = 'GANADEROS OSCENSES  •  VACAS EN LIBERTAD  •  0 INTERMEDIARIOS  •  KM0  •  100% ARAGÓN  •  PIRINEO ARAGONÉS  •  GRAUS · RIBAGORZA  •  TRADICIÓN GANADERA  •  VACAS FELICES  •  '
+const TEXT = 'GANADEROS OSCENSES  •  BIENESTAR ANIMAL  •  0 INTERMEDIARIOS  •  KM0  •  100% ARAGÓN  •  RIBAGORZA · HUESCA  •  GRAUS · ARAGÓN  •  TRADICIÓN GANADERA  •  LECHE DE AQUÍ  •  '
 
 export default function Marquee() {
   const trackRef = useRef(null)

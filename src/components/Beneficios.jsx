@@ -6,9 +6,9 @@ import './Beneficios.css'
 gsap.registerPlugin(ScrollTrigger)
 
 const ITEMS = [
-  { num: '01', title: 'Cero intermediarios', desc: 'Del establo en Graus al lineal aragonés. Sin caminos largos, sin manos de más. La cadena más corta posible.' },
-  { num: '02', title: 'Vacas felices',       desc: 'Más de 200 días al año en el exterior. Pasto libre en el Pirineo oscense. Una vaca feliz da mejor leche — sin excepciones.' },
-  { num: '03', title: 'Tradición oscense',   desc: 'Familias ganaderas de la Ribagorza de generación en generación. Este oficio no se aprende en un curso, se hereda.' },
+  { num: '01', title: 'Cero intermediarios', desc: 'De las granjas aragonesas a Binéfar, y de Binéfar al lineal. Sin caminos largos, sin manos de más. La cadena más corta posible.' },
+  { num: '02', title: 'Bienestar animal',     desc: 'Ganadería extensiva en Aragón. Animales bien cuidados y bien alimentados. Una vaca bien tratada produce mejor leche — eso sí es un hecho.' },
+  { num: '03', title: 'Tradición aragonesa',  desc: 'Familias ganaderas aragonesas de generación en generación. Este oficio no se aprende en un curso, se hereda.' },
   { num: '04', title: 'KM0 de verdad',       desc: 'Producida y distribuida en Aragón. No son cientos de kilómetros en camión. Es leche de aquí, para los de aquí.' },
   { num: '05', title: 'Sin aditivos',        desc: 'Sin conservantes, sin estabilizantes, sin nada que no sea leche del Pirineo. La etiqueta más limpia es la que no necesita explicarse.' },
   { num: '06', title: '100% aragonesa',      desc: 'Huesca, Zaragoza, Teruel. Copirineo es de Aragón y para Aragón. Orgullo de tierra, no de marketing.' },
