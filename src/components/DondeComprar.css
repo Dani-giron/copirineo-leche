@@ -1,0 +1,160 @@
+.donde {
+  background: var(--blue-deep);
+  padding: 9rem 0;
+  overflow: hidden;
+}
+
+.donde__grid {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 3rem;
+  display: grid;
+  grid-template-columns: 50fr 50fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* === TITLE === */
+.donde__title {
+  margin-bottom: 2.5rem;
+}
+
+.donde__title .line-wrap {
+  overflow: hidden;
+  display: block;
+}
+
+.donde__title-cerca {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 10vw, 13rem);
+  line-height: 0.88;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+
+.donde__title-deti {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 10vw, 13rem);
+  line-height: 0.88;
+  color: var(--gold);
+  letter-spacing: -0.02em;
+}
+
+/* === DESC === */
+.donde__desc {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.55);
+  max-width: 400px;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+
+/* === LISTA === */
+.donde__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.donde__item {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2vw, 2rem);
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.75);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  transition: color 0.2s ease;
+  cursor: default;
+}
+
+.donde__item:hover {
+  color: var(--gold);
+}
+
+.donde__arrow {
+  color: var(--gold);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.donde__item:hover .donde__arrow {
+  transform: translateX(6px);
+}
+
+/* === DERECHA === */
+.donde__right {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  will-change: transform;
+}
+
+/* === CAMIÓN === */
+.donde__truck {
+  position: relative;
+}
+
+.donde__truck-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+  filter: saturate(0.85);
+}
+
+.donde__truck-caption {
+  display: block;
+  margin-top: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* === MAPA === */
+.donde__map {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.donde__map svg {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 900px) {
+  .donde__grid {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+  .donde__map {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .donde {
+    padding: 5rem 0;
+  }
+  .donde__grid {
+    padding: 0 1.5rem;
+  }
+  .donde__title-cerca,
+  .donde__title-deti {
+    font-size: clamp(3.5rem, 18vw, 7rem);
+  }
+}

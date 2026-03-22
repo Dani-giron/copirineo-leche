@@ -1,0 +1,131 @@
+.productos {
+  padding: 7rem 2rem;
+  background: var(--blanco);
+  overflow: hidden;
+}
+
+.productos__header {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto 4rem;
+}
+
+.productos__tag {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--azul-claro);
+  margin-bottom: 0.8rem;
+}
+
+.productos__subtitle {
+  font-size: 1rem;
+  color: #718096;
+  line-height: 1.7;
+  margin-top: 0.8rem;
+}
+
+.productos__grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.producto-card {
+  background: var(--crema-claro);
+  border-radius: 12px;
+  padding: 2rem 1.5rem 1.8rem;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform, opacity;
+}
+
+.producto-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 12px 12px 0 0;
+}
+
+.producto-card--azul::before { background: var(--azul-claro); }
+.producto-card--verde::before { background: var(--verde-prado); }
+.producto-card--dorado::before { background: var(--dorado); }
+.producto-card--rojo::before { background: #c0392b; }
+
+.producto-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 48px rgba(26, 58, 107, 0.14);
+}
+
+.producto-card__icon {
+  font-size: 3rem;
+  margin-bottom: 1.2rem;
+  display: block;
+  line-height: 1;
+}
+
+.producto-card__name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--azul-profundo);
+  margin-bottom: 0.6rem;
+}
+
+.producto-card__desc {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: #5a6a7e;
+  margin-bottom: 1.2rem;
+}
+
+.producto-card__pill {
+  display: inline-block;
+  padding: 0.3rem 0.9rem;
+  border-radius: 50px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.producto-card--azul .producto-card__pill {
+  background: rgba(45, 94, 168, 0.1);
+  color: var(--azul-claro);
+}
+
+.producto-card--verde .producto-card__pill {
+  background: rgba(74, 124, 63, 0.1);
+  color: var(--verde-prado);
+}
+
+.producto-card--dorado .producto-card__pill {
+  background: rgba(196, 163, 90, 0.12);
+  color: #9a7930;
+}
+
+.producto-card--rojo .producto-card__pill {
+  background: rgba(192, 57, 43, 0.1);
+  color: #c0392b;
+}
+
+@media (max-width: 1024px) {
+  .productos__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .productos__grid {
+    grid-template-columns: 1fr;
+  }
+}
