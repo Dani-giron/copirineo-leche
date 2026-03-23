@@ -9,7 +9,7 @@
   margin: 0 auto;
   padding: 0 3rem;
   display: grid;
-  grid-template-columns: 50fr 50fr;
+  grid-template-columns: 42fr 58fr;
   gap: 4rem;
   align-items: center;
 }
@@ -90,58 +90,32 @@
   transform: translateX(6px);
 }
 
-/* === DERECHA === */
-.donde__right {
+/* === MAPA PROTAGONISTA === */
+.donde__map-col {
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-/* === CAMIÓN === */
-.donde__truck {
-  position: relative;
-}
-
-.donde__truck-img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  object-position: center 40%;
-  display: block;
-  filter: saturate(0.85);
-}
-
-.donde__truck-caption {
-  display: block;
-  margin-top: 0.75rem;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-
-/* === MAPA === */
-.donde__map {
-  display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
 }
 
-.donde__map svg {
+.donde__map-col svg {
   width: 100%;
-  max-width: 480px;
+  max-width: 560px;
   height: auto;
+  filter: drop-shadow(0 0 40px rgba(196,163,90,0.15));
 }
 
 /* === RESPONSIVE === */
 @media (max-width: 900px) {
   .donde__grid {
     grid-template-columns: 1fr;
-    gap: 4rem;
+    gap: 3rem;
   }
-  .donde__map {
+  .donde__map-col {
     justify-content: flex-start;
+  }
+  .donde__map-col svg {
+    max-width: 380px;
   }
 }
 

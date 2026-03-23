@@ -5,6 +5,22 @@
   padding: 6rem 0 3rem;
 }
 
+/* === CAMIÓN FONDO === */
+.footer__truck-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.footer__truck-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  opacity: 0.06;
+  filter: saturate(0) contrast(1.2);
+}
+
 /* === BG TEXT === */
 .footer__bg-text {
   position: absolute;

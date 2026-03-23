@@ -123,19 +123,9 @@ export default function DondeComprar() {
           </ul>
         </div>
 
-        {/* Derecha: camión + mapa */}
-        <div ref={mapRef} className="donde__right" style={{ opacity: 0 }}>
-          <div className="donde__truck">
-            <img
-              src="/camion de leche.jpeg"
-              alt="Camión Copirineo — El sabor de aquí"
-              className="donde__truck-img"
-            />
-            <span className="donde__truck-caption">El sabor de aquí · Aragón</span>
-          </div>
-          <div className="donde__map">
-            <AragonMap width={480} />
-          </div>
+        {/* Derecha: mapa protagonista */}
+        <div ref={mapRef} className="donde__map-col" style={{ opacity: 0 }}>
+          <AragonMap width={560} />
         </div>
 
       </div>

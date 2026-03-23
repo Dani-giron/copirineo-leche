@@ -26,6 +26,11 @@ export default function Footer() {
 
   return (
     <footer className="footer">
+      {/* Foto camión como fondo con overlay */}
+      <div className="footer__truck-bg" aria-hidden="true">
+        <img src="/camion de leche.jpeg" alt="" loading="lazy" />
+      </div>
+
       {/* BG text parallax */}
       <span ref={bgTextRef} className="footer__bg-text" aria-hidden="true">
         COPIRINEO

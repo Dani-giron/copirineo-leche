@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import CheeseWedge from './svgs/CheeseWedge'
@@ -23,6 +23,12 @@ const PANELS = [
     label: 'ENTERA',
     sub: 'Toda la cremosidad del Pirineo',
     detail: '3,6% MG',
+    nutrition: [
+      { label: 'Energía',    value: '~65 kcal' },
+      { label: 'Grasas',     value: '~3,6 g' },
+      { label: 'Proteínas',  value: '~3,2 g' },
+      { label: 'Azúcares',   value: '~4,7 g' },
+    ],
     component: <BrickPhoto alt="Copirineo Leche Entera" />,
     deco: 'drops',
   },
@@ -32,7 +38,13 @@ const PANELS = [
     text: '#ffffff',
     label: 'SEMI',
     sub: 'Equilibrio y sabor natural',
-    detail: '1,6% MG',
+    detail: '0,3g MG/100ml',
+    nutrition: [
+      { label: 'Energía',    value: '34 kcal' },
+      { label: 'Grasas',     value: '0,3 g' },
+      { label: 'Proteínas',  value: '3,15 g' },
+      { label: 'Azúcares',   value: '4,75 g' },
+    ],
     component: <BrickPhoto alt="Copirineo Leche Semidesnatada" style={{ filter: 'hue-rotate(80deg) saturate(0.7) brightness(1.1)' }} />,
     deco: 'leaves',
   },
@@ -40,9 +52,16 @@ const PANELS = [
     id: 'desnatada',
     bg: '#ede8dd',
     text: '#0a0a0a',
+    wide: true,
     label: 'DESNATADA',
     sub: 'Ligereza sin renunciar al origen',
     detail: '0,1% MG',
+    nutrition: [
+      { label: 'Energía',    value: '~35 kcal' },
+      { label: 'Grasas',     value: '~0,1 g' },
+      { label: 'Proteínas',  value: '~3,4 g' },
+      { label: 'Azúcares',   value: '~4,8 g' },
+    ],
     component: <BrickPhoto alt="Copirineo Leche Desnatada" style={{ filter: 'saturate(0.3) brightness(1.05)' }} />,
     deco: 'mountains',
   },
@@ -53,15 +72,35 @@ const PANELS = [
     label: 'QUESO',
     sub: 'Artesanal · Curación natural',
     detail: 'PIRINEO',
+    nutrition: [
+      { label: 'Energía',    value: '~370 kcal' },
+      { label: 'Grasas',     value: '~30 g' },
+      { label: 'Proteínas',  value: '~25 g' },
+      { label: 'Sal',        value: '~1,5 g' },
+    ],
     component: <CheeseWedge width={260} />,
     deco: 'knife',
   },
 ]
 
 export default function Productos() {
-  const sectionRef = useRef(null)
-  const trackRef   = useRef(null)
-  const isMobile   = useRef(false)
+  const sectionRef  = useRef(null)
+  const trackRef    = useRef(null)
+  const currentIdx  = useRef(0)
+  const [dir, setDir] = useState('next') // 'next' | 'prev'
+
+  const handleArrow = () => {
+    const track = trackRef.current
+    if (!track) return
+    const panels = track.querySelectorAll('.panel')
+    const next = dir === 'next' ? currentIdx.current + 1 : currentIdx.current - 1
+    const clamped = Math.max(0, Math.min(next, panels.length - 1))
+    panels[clamped]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
+    currentIdx.current = clamped
+    // Flip al llegar a los bordes
+    if (clamped === panels.length - 1) setDir('prev')
+    else if (clamped === 0) setDir('next')
+  }
 
   useEffect(() => {
     const mobile = window.innerWidth <= 768
@@ -118,44 +157,71 @@ export default function Productos() {
         {PANELS.map((panel, i) => (
           <div
             key={panel.id}
-            className="panel"
+            className={`panel${panel.wide ? ' panel--wide' : ''}`}
             style={{ background: panel.bg, color: panel.text }}
           >
-            {/* Número panel */}
-            <span className="panel__num" style={{ color: `${panel.text}12` }}
+            {/* Número decorativo fondo */}
+            <span className="panel__num" style={{ color: `${panel.text}10` }}
               aria-hidden="true">0{i + 1}</span>
 
-            {/* Texto enorme */}
+            {/* Label — encoge y vuela a esquina en hover */}
             <div className="panel__label-wrap">
               <h2 className="panel__label">{panel.label}</h2>
-              <p className="panel__sub" style={{ color: `${panel.text}99` }}>
+              <p className="panel__sub" style={{ color: `${panel.text}90` }}>
                 {panel.sub}
               </p>
             </div>
 
-            {/* Producto SVG */}
-            <div className="panel__product">
-              {panel.component}
-            </div>
+            {/* Zona hover fija — no se mueve, evita feedback loop */}
+            <div className="panel__hover-zone" aria-hidden="true" />
 
-            {/* Detalle / badge */}
+            {/* Producto — se centra en hover */}
+            <div className="panel__product">{panel.component}</div>
+
+            {/* Badge */}
             <div className="panel__badge"
-              style={{
-                borderColor: `${panel.text}30`,
-                color: panel.text,
-              }}
-            >
+              style={{ borderColor: `${panel.text}30`, color: panel.text }}>
               {panel.detail}
             </div>
 
-            {/* Decoración específica */}
+            {/* Tabla nutricional — aparece centrada bajo el brick */}
+            {panel.nutrition && (
+              <div className="panel__nutrition">
+                <p className="panel__nutrition-header"
+                  style={{ color: `${panel.text}45` }}>
+                  Por 100 ml
+                </p>
+                {panel.nutrition.map((row, j) => (
+                  <div key={j} className="panel__nutrition-row"
+                    style={{ borderColor: `${panel.text}18`, '--delay': `${j * 0.07}s` }}>
+                    <span style={{ color: `${panel.text}65` }}>{row.label}</span>
+                    <span className="panel__nutrition-val"
+                      style={{ color: panel.text }}>{row.value}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Decoraciones */}
             {panel.deco === 'drops' && <DropsDeco color={panel.text} />}
             {panel.deco === 'leaves' && <LeavesDeco color={panel.text} />}
             {panel.deco === 'mountains' && <MiniMountains color={panel.text} />}
             {panel.deco === 'knife' && <KnifeDeco color={panel.text} />}
+
           </div>
         ))}
       </div>
+
+      {/* Flecha flotante móvil — una sola, cambia de sentido */}
+      <button
+        className={`productos__float-arrow${dir === 'prev' ? ' productos__float-arrow--prev' : ''}`}
+        onClick={handleArrow}
+        aria-label={dir === 'next' ? 'Siguiente producto' : 'Producto anterior'}
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </button>
     </section>
   )
 }

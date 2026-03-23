@@ -52,10 +52,6 @@
   min-width: 90vw;
   height: 100vh;
   min-height: 600px;
-  display: grid;
-  grid-template-columns: 55fr 45fr;
-  align-items: center;
-  padding: 5rem 4rem 5rem 5rem;
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -72,10 +68,20 @@
   user-select: none;
 }
 
-/* === LABEL PRINCIPAL === */
+/* ── LABEL: vive en absoluto, encoge hacia esquina sup-izq en hover ── */
 .panel__label-wrap {
-  z-index: 2;
-  position: relative;
+  position: absolute;
+  top: 3rem;
+  left: 3.5rem;
+  transform-origin: top left;
+  transform: translateY(36vh);          /* empujado al centro vertical */
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 3;
+  will-change: transform;
+}
+
+.panel:has(.panel__hover-zone:hover) .panel__label-wrap {
+  transform: translateY(22vh) scale(0.3); /* encima del brick, más cerca y más grande */
 }
 
 .panel__label {
@@ -83,7 +89,11 @@
   font-size: clamp(5rem, 14vw, 18vw);
   line-height: 0.88;
   letter-spacing: -0.02em;
-  will-change: transform;
+}
+
+/* Etiquetas largas (ej. DESNATADA) — font más pequeño para no tapar la foto */
+.panel--wide .panel__label {
+  font-size: clamp(4rem, 9vw, 11vw);
 }
 
 .panel__sub {
@@ -92,15 +102,40 @@
   font-size: clamp(1rem, 1.8vw, 1.6rem);
   margin-top: 1.2rem;
   font-weight: 400;
+  transition: opacity 0.25s ease;
 }
 
-/* === PRODUCT === */
+.panel:has(.panel__hover-zone:hover) .panel__sub {
+  opacity: 0;
+}
+
+/* ── ZONA HOVER FIJA: no se mueve nunca, evita feedback loop ── */
+.panel__hover-zone {
+  position: absolute;
+  top: 20%;
+  right: 0;
+  width: 55%;
+  height: 65%;
+  z-index: 5;
+  cursor: pointer;
+}
+
+/* ── PRODUCTO: siempre absoluto, viaja al centro en hover ── */
 .panel__product {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(18%, -50%);      /* arranca en columna derecha */
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 3;
+  will-change: transform;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 3;
-  position: relative;
+}
+
+.panel:has(.panel__hover-zone:hover) .panel__product {
+  transform: translate(-50%, -60%);     /* centra y sube para dejar sitio */
 }
 
 .panel__product-photo {
@@ -109,19 +144,106 @@
   object-fit: contain;
   display: block;
   filter: drop-shadow(16px 16px 0 rgba(0,0,0,0.3));
+  cursor: pointer;
+  transition: filter 0.3s ease, transform 0.3s ease;
 }
 
-/* === BADGE === */
+.panel__product-photo:hover {
+  filter: drop-shadow(16px 16px 0 rgba(0,0,0,0.3)) brightness(1.05);
+  transform: scale(1.03);
+}
+
+/* Hint: pequeño texto debajo del brick para indicar que es interactivo */
+.panel__product::after {
+  content: 'VER VALORES';
+  position: absolute;
+  bottom: -1.8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  opacity: 0.35;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.panel:has(.panel__hover-zone:hover) .panel__product::after {
+  opacity: 0;
+}
+
+/* ── BADGE: desaparece en hover ── */
 .panel__badge {
   position: absolute;
   bottom: 3rem;
-  left: 5rem;
+  left: 3.5rem;
   font-family: var(--font-mono);
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   padding: 0.5rem 1rem;
   border: 1px solid;
+  z-index: 4;
+  transition: opacity 0.2s ease;
+}
+
+.panel:has(.panel__hover-zone:hover) .panel__badge {
+  opacity: 0;
+}
+
+/* ── TABLA NUTRICIONAL: aparece centrada bajo el brick ── */
+.panel__nutrition {
+  position: absolute;
+  bottom: 3.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(16px);
+  width: 380px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease 0.2s, transform 0.35s ease 0.2s;
+  z-index: 4;
+}
+
+.panel:has(.panel__hover-zone:hover) .panel__nutrition {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.panel__nutrition-header {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.panel__nutrition-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.28s ease var(--delay, 0s),
+    transform 0.28s ease var(--delay, 0s);
+}
+
+.panel:has(.panel__hover-zone:hover) .panel__nutrition-row {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.panel__nutrition-val {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  letter-spacing: -0.01em;
+  line-height: 1;
 }
 
 /* === DECOS === */
@@ -186,7 +308,6 @@
     will-change: auto !important;
     /* Peek del panel siguiente */
     padding-right: 8vw;
-    /* Necesita un ancho fijo para que los hijos encajen */
     width: 100vw;
   }
 
@@ -194,45 +315,144 @@
     display: none;
   }
 
+  /* Panel: flex column — sobreescribe el layout absoluto de desktop */
   .panel {
     width: 88vw;
     min-width: 88vw;
     height: 90svh;
-    min-height: 500px;
+    min-height: 560px;
     scroll-snap-align: start;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
-    padding: 3rem 1.75rem 2.5rem;
-    gap: 1rem;
-    margin-right: 0.6rem;
     flex-shrink: 0;
+    margin-right: 0;
+    overflow: visible;      /* permite que la flecha sobresalga al borde */
+    /* Flex column para flujo normal */
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem 1.75rem 2rem;
   }
 
+  /* Número decorativo — se queda absoluto (solo visual) */
   .panel__num {
     font-size: 38vw;
     right: -0.5rem;
+    position: absolute;
+    clip-path: inset(0);     /* evita que desborde fuera del panel */
+  }
+
+  /* Label — vuelve al flujo, sin transform */
+  .panel__label-wrap {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none !important;
+    transform-origin: unset;
+    transition: none;
+    flex-shrink: 0;
+    z-index: 3;
+    margin-bottom: 0.25rem;
   }
 
   .panel__label {
-    font-size: clamp(4.5rem, 22vw, 8rem);
+    font-size: clamp(4rem, 20vw, 7rem);
     line-height: 0.85;
   }
 
+  .panel__sub {
+    opacity: 1 !important;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    transition: none;
+  }
+
+  /* Zona hover — oculta en móvil (no hay hover en touch) */
+  .panel__hover-zone {
+    display: none;
+  }
+
+  /* Producto — ocupa el espacio restante, centrado */
   .panel__product {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none !important;
+    transition: none;
+    display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* Ocultar hint "VER VALORES" */
+  .panel__product::after {
+    display: none;
   }
 
   .panel__product-photo {
-    width: 180px;
+    width: auto;
+    max-width: 140px;
+    max-height: 200px;
+    object-fit: contain;
   }
 
+  /* Badge — flujo normal */
   .panel__badge {
     position: static;
     display: inline-block;
-    margin-top: 0.75rem;
+    flex-shrink: 0;
+    margin-top: 0.5rem;
+    font-size: 0.62rem;
+    padding: 0.35rem 0.75rem;
   }
 
+  /* Tabla nutricional — siempre visible en móvil, en flujo normal */
+  .panel__nutrition {
+    position: static;
+    bottom: auto;
+    left: auto;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: auto;
+    width: 100%;
+    transition: none;
+    margin-top: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .panel__nutrition-header {
+    margin-bottom: 0.4rem;
+  }
+
+  .panel__nutrition-row {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none;
+    padding: 0.4rem 0;
+    font-size: 0.82rem;
+  }
+
+  .panel__nutrition-val {
+    font-size: 1.2rem;
+  }
+
+  /* Resetear todos los estados hover — hover-zone está oculto así que
+     :has() no dispara, pero por seguridad cancelamos todo */
+  .panel:has(.panel__hover-zone:hover) .panel__label-wrap,
+  .panel:has(.panel__hover-zone:hover) .panel__product {
+    transform: none !important;
+  }
+  .panel:has(.panel__hover-zone:hover) .panel__sub,
+  .panel:has(.panel__hover-zone:hover) .panel__badge {
+    opacity: 1 !important;
+  }
+  .panel:has(.panel__hover-zone:hover) .panel__nutrition {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .panel:has(.panel__hover-zone:hover) .panel__nutrition-row {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 /* Header móvil — oculto en desktop */
@@ -269,5 +489,56 @@
   @keyframes pulse-hint {
     0%, 100% { opacity: 0.5; }
     50%       { opacity: 1;   }
+  }
+}
+
+/* === FLECHA FLOTANTE MÓVIL — oculta en desktop === */
+.productos__float-arrow {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .productos__float-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 1rem;
+    /* centrada sobre la zona de panels (descuenta header ~3rem) */
+    top: calc(3rem + 45svh);
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: rgba(10, 10, 10, 0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+    z-index: 30;
+    padding: 0;
+    transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+  }
+
+  .productos__float-arrow svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-left: 2px;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Rota 180° cuando apunta hacia atrás */
+  .productos__float-arrow--prev svg {
+    transform: rotate(180deg);
+    margin-left: -2px;
+    margin-right: 2px;
+  }
+
+  .productos__float-arrow:active {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(10, 10, 10, 0.55);
   }
 }
